@@ -1,0 +1,53 @@
+{
+  "name": "vlmbox",
+  "version": "0.1.0",
+  "description": "Turn vision-language model grounding output (Gemini, Qwen-VL, PaliGemma, Florence-2, Moondream) into original-image pixel boxes, and draw them correctly.",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/LeeGyeongPil/vlmbox.git" },
+  "homepage": "https://github.com/LeeGyeongPil/vlmbox#readme",
+  "bugs": { "url": "https://github.com/LeeGyeongPil/vlmbox/issues" },
+  "type": "module",
+  "sideEffects": false,
+  "keywords": ["vlm", "grounding", "bounding-box", "gemini", "qwen-vl", "paligemma", "florence-2", "moondream", "smart-resize", "react"],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
+    }
+  },
+  "files": ["dist", "README.md", "README.ko.md", "CHANGELOG.md", "LICENSE"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepack": "npm run build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "example": "npm run build && node examples/basic.mjs",
+    "demo": "vite --config vite.config.ts",
+    "demo:build": "vite build --config vite.config.ts"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true }
+  },
+  "devDependencies": {
+    "@testing-library/react": "16.3.3",
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "jsdom": "31.0.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.8",
+    "vitest": "5.1.0"
+  }
+}
