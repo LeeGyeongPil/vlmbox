@@ -1,0 +1,38 @@
+:root {
+  font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans KR', sans-serif;
+  color: #1d2733;
+  background: #f5f7fa;
+}
+body { margin: 0; }
+.page { max-width: 1100px; margin: 0 auto; padding: 20px; }
+.top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+h1 { margin: 0 0 4px; font-size: 26px; }
+h2 { margin: 20px 0 8px; font-size: 18px; }
+h3 { margin: 14px 0 6px; font-size: 15px; }
+.muted { color: #5b6b7c; font-size: 14px; margin: 4px 0; }
+.error { color: #b3261e; font-size: 14px; }
+.notice { background: #fff4d6; border: 1px solid #f0d58a; border-radius: 8px; padding: 8px 12px; font-size: 14px; }
+label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 600; }
+label.block { margin-bottom: 8px; }
+.lang { min-width: 130px; }
+select, input[type='number'], textarea { font: inherit; padding: 6px 8px; border: 1px solid #b8c4d0; border-radius: 6px; background: #fff; }
+textarea { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; resize: vertical; }
+button { font: inherit; padding: 6px 10px; border-radius: 6px; border: 1px solid #b8c4d0; background: #fff; cursor: pointer; }
+.controls { display: flex; flex-wrap: wrap; gap: 12px; margin: 12px 0; }
+.controls label { min-width: 200px; flex: 1; }
+.columns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 800px) { .columns { grid-template-columns: 1fr; } }
+.stage { width: 100%; aspect-ratio: 4 / 3; background: #dde3ea; border-radius: 8px; overflow: hidden; }
+.legend { display: flex; gap: 8px; align-items: center; }
+.swatch { display: inline-block; width: 16px; height: 0; border-top: 3px solid #e4572e; }
+.swatch.truth { border-top: 3px dashed #222; margin-left: 12px; }
+.upload { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.max-error strong { font-size: 22px; }
+table { border-collapse: collapse; margin: 8px 0; font-size: 13px; width: 100%; }
+caption { text-align: left; font-weight: 600; padding: 4px 0; }
+th, td { border-bottom: 1px solid #dde3ea; padding: 3px 8px; text-align: right; }
+th:first-child, td:first-child { text-align: left; }
+.warnings { background: #fff; border: 1px solid #dde3ea; border-radius: 8px; padding: 4px 12px 8px; margin-top: 8px; }
+.warnings ul { margin: 0; padding-left: 18px; font-size: 14px; }
+.smart { margin-top: 24px; border-top: 1px solid #dde3ea; padding-top: 4px; }
+.smart li { font-size: 16px; margin: 4px 0; }
