@@ -1,0 +1,2 @@
+<|object_ref_start|>cat<|object_ref_end|><|box_start|>(250,250),(500,750)<|box_end|>
+<|object_ref_start|>cup<|object_ref_end|><|box_start|>(500,500),(750,750)<|box_end|>

@@ -1,0 +1,15 @@
+[
+  { "id": "gemini", "model": "gemini", "file": "gemini.txt", "expect": "boxes" },
+  { "id": "gemini-noisy", "model": "gemini", "file": "gemini-noisy.txt", "expect": "boxes" },
+  { "id": "gemini-wrapped", "model": "gemini", "file": "gemini-wrapped.json", "expect": "boxes" },
+  { "id": "qwen2-vl", "model": "qwen2-vl", "file": "qwen2-vl.txt", "expect": "boxes" },
+  { "id": "qwen2.5-vl", "model": "qwen2.5-vl", "file": "qwen2.5-vl.txt", "expect": "boxes" },
+  { "id": "qwen2.5-vl-points", "model": "qwen2.5-vl", "file": "qwen2.5-vl-points.txt", "expect": "points" },
+  { "id": "qwen3-vl", "model": "qwen3-vl", "file": "qwen3-vl.txt", "expect": "boxes" },
+  { "id": "qwen3-vl-points", "model": "qwen3-vl", "file": "qwen3-vl-points.txt", "expect": "points" },
+  { "id": "qwen3-vl-truncated", "model": "qwen3-vl", "file": "qwen3-vl-truncated.txt", "expect": "first-box" },
+  { "id": "paligemma", "model": "paligemma", "file": "paligemma.txt", "expect": "boxes" },
+  { "id": "florence-2", "model": "florence-2", "file": "florence-2.txt", "expect": "boxes" },
+  { "id": "moondream", "model": "moondream", "file": "moondream.json", "expect": "first-box" },
+  { "id": "moondream-points", "model": "moondream", "file": "moondream-points.json", "expect": "points" }
+]
