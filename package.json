@@ -1,6 +1,6 @@
 {
   "name": "vlmbox",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Turn vision-language model grounding output (Gemini, Qwen-VL, PaliGemma, Florence-2, Moondream) into original-image pixel boxes, and draw them correctly.",
   "license": "MIT",
   "repository": { "type": "git", "url": "git+https://github.com/LeeGyeongPil/vlmbox.git" },

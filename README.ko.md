@@ -312,6 +312,8 @@ npm run demo:build   # 데모 페이지 정적 빌드(demo-dist/)
 python3 -I scripts/gen-smart-resize-ref.py   # smart_resize 기준표 다시 만들기
 ```
 
+개발(테스트·데모)에는 Node 22.22 이상이 필요하고, 라이브러리 사용은 Node 20 이상이면 됩니다.
+
 `npm run build` 는 `dist/`(ES 모듈과 타입 선언)를 만듭니다. 코어 진입점은 React를 import 하지 않습니다.
 
 ## 라이선스

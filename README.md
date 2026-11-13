@@ -312,6 +312,8 @@ npm run demo:build   # static build of the demo page into demo-dist/
 python3 -I scripts/gen-smart-resize-ref.py   # regenerate the smart_resize reference table
 ```
 
+Developing (tests, demo) needs Node 22.22 or newer; using the library needs Node 20 or newer.
+
 `npm run build` writes `dist/` (ES modules and type declarations). The core entry does not import React.
 
 ## License
