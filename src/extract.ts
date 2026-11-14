@@ -59,16 +59,14 @@ function tryParse(text: string): { ok: true; value: unknown } | { ok: false } {
   }
 }
 
-/**
- * Pull a JSON value out of a model response: strips code fences and surrounding prose and
- * recovers the complete items of a response cut off mid-array. Returns null if nothing usable.
- */
-export function extractJson(text: string): Extracted | null {
-  const body = stripFence(text);
-  const whole = tryParse(body.trim());
-  if (whole.ok) return { value: whole.value, truncated: false };
-  const start = body.search(/[[{]/);
-  if (start < 0) return null;
+/** True for an object, or an array holding at least one object (the shape of box and point items). */
+function looksLikeItems(value: unknown): boolean {
+  if (Array.isArray(value)) return value.some((v) => typeof v === 'object' && v !== null && !Array.isArray(v));
+  return typeof value === 'object' && value !== null;
+}
+
+/** Parse the value that starts at `start`, repairing a cut-off array if needed. */
+function candidateAt(body: string, start: number): Extracted | null {
   const s = scan(body, start);
   if (s.end > 0) {
     const part = tryParse(body.slice(start, s.end));
@@ -79,4 +77,26 @@ export function extractJson(text: string): Extracted | null {
     return fixed.ok ? { value: fixed.value, truncated: true } : null;
   }
   return null;
+}
+
+/**
+ * Pull a JSON value out of a model response: strips code fences and surrounding prose and
+ * recovers the complete items of a response cut off mid-array. Brackets inside the prose
+ * (for example "[1]") are skipped: the first candidate that looks like box or point items wins,
+ * and if none does, the first candidate that parses is returned. Returns null if nothing usable.
+ */
+export function extractJson(text: string): Extracted | null {
+  const body = stripFence(text);
+  const whole = tryParse(body.trim());
+  if (whole.ok) return { value: whole.value, truncated: false };
+  const first = body.search(/[[{]/);
+  if (first < 0) return null;
+  const fallback = candidateAt(body, first);
+  for (let i = first; i < body.length; i++) {
+    const c = body[i];
+    if (c !== '[' && c !== '{') continue;
+    const cand = i === first ? fallback : candidateAt(body, i);
+    if (cand && looksLikeItems(cand.value)) return cand;
+  }
+  return fallback;
 }

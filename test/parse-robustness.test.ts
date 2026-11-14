@@ -197,3 +197,20 @@ describe('labels', () => {
     expect(r.boxes.map((b) => b.label)).toEqual(['cat', 'cat']);
   });
 });
+
+describe('brackets in the prose before the JSON', () => {
+  const opts = { model: 'qwen3-vl', image: { width: 1920, height: 1080 } } as const;
+  const expected = [{ label: 'cat', x1: 480, y1: 270, x2: 960, y2: 810 }];
+
+  it('skips a number list like "[1]" in the explanation', () => {
+    const r = parseGrounding('Detected [1] object:\n[{"bbox_2d": [250, 250, 500, 750], "label": "cat"}]', opts);
+    expect(r.boxes).toEqual(expected);
+    expect(r.warnings).toEqual([]);
+  });
+
+  it('skips a coordinate list quoted in the explanation', () => {
+    const r = parseGrounding('The cat is at [250, 250, 500, 750].\n[{"bbox_2d":[250,250,500,750],"label":"cat"}]', opts);
+    expect(r.boxes).toEqual(expected);
+    expect(r.warnings).toEqual([]);
+  });
+});
