@@ -4,6 +4,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-11-16
+
+### Added
+
+- `gemini` (and `auto`) now read the Gemini spatial-understanding formats `{"point": [y, x]}` and `{"label", "y", "x", "y2", "x2"}` (0-1000, y first).
+
 ## [0.1.2] - 2026-11-15
 
 ### Fixed
