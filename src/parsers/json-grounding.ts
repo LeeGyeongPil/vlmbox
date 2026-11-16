@@ -2,10 +2,13 @@ import { extractJson } from '../extract.js';
 import type { GroundingWarning } from '../types.js';
 import { EMPTY, isNumbers, skipped, type ParsedItems, type RawItem } from './common.js';
 
-export type JsonKeys = { box: string[]; point: string[] };
+/** `yxyx` also reads boxes written as separate keys {y, x, y2, x2} (Gemini spatial-understanding docs). */
+export type JsonKeys = { box: string[]; point: string[]; yxyx?: boolean };
 
 /** Properties that commonly wrap the item list, e.g. Gemini's {"boxes": [...]}. */
 const WRAPPERS = ['boxes', 'objects', 'detections', 'items', 'results', 'points'];
+
+const YXYX = ['y', 'x', 'y2', 'x2'];
 
 /** Find the array of items in a parsed value, or null if there is none. */
 export function findItemArray(value: unknown, keys: string[]): unknown[] | null {
@@ -42,7 +45,7 @@ export function parseJsonItems(input: string | object, keys: JsonKeys): ParsedIt
       });
     }
   }
-  const arr = findItemArray(value, [...keys.box, ...keys.point]);
+  const arr = findItemArray(value, [...keys.box, ...keys.point, ...(keys.yxyx ? ['y2'] : [])]);
   if (!arr) return EMPTY;
   const items: RawItem[] = [];
   arr.forEach((entry, index) => {
@@ -56,6 +59,9 @@ export function parseJsonItems(input: string | object, keys: JsonKeys): ParsedIt
     const pointKey = keys.point.find((k) => k in rec);
     if (boxKey && isNumbers(rec[boxKey], 4)) {
       items.push({ kind: 'box', label, values: rec[boxKey] as number[] });
+    } else if (keys.yxyx && !boxKey && YXYX.every((k) => typeof rec[k] === 'number')) {
+      // Same order as box_2d: [y, x, y2, x2].
+      items.push({ kind: 'box', label, values: YXYX.map((k) => rec[k] as number) });
     } else if (pointKey && isNumbers(rec[pointKey], 2)) {
       items.push({ kind: 'point', label, values: rec[pointKey] as number[] });
     } else if (boxKey || pointKey) {

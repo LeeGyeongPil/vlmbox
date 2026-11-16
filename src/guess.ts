@@ -89,11 +89,17 @@ export function detectConvention(input: string | object, image: Size): Detection
     if (!extracted) return null;
     value = extracted.value;
   }
-  const arr = findItemArray(value, ['box_2d', 'bbox_2d', 'point_2d', 'x_min', 'x']);
+  const arr = findItemArray(value, ['box_2d', 'bbox_2d', 'point_2d', 'point', 'y2', 'x_min', 'x']);
   if (!arr) return null;
   const has = (key: string) => arr.some((it) => typeof it === 'object' && it !== null && key in it);
   if (has('box_2d')) {
     return { model: 'gemini', confidence: 'high', reason: 'items use the "box_2d" key (Gemini format, y first)' };
+  }
+  if (arr.some((it) => typeof it === 'object' && it !== null && 'y2' in it && 'x2' in it)) {
+    return { model: 'gemini', confidence: 'high', reason: 'items use y/x/y2/x2 keys (Gemini format, y first)' };
+  }
+  if (arr.some((it) => typeof it === 'object' && it !== null && Array.isArray((it as Record<string, unknown>).point))) {
+    return { model: 'gemini', confidence: 'high', reason: 'items use the "point" key as [y, x] (Gemini format, y first)' };
   }
   if (has('x_min') || has('x')) {
     return { model: 'moondream', confidence: 'high', reason: 'items use x_min/x_max or x/y fractions (Moondream format)' };

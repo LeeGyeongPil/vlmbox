@@ -12,7 +12,7 @@ import { assertSize, resolveResize, smartResize } from './smart-resize.js';
 import type { GroundingResult, GroundingWarning, ParseOptions, Size } from './types.js';
 
 const JSON_KEYS: Record<'json-gemini' | 'json-qwen' | 'json-custom', JsonKeys> = {
-  'json-gemini': { box: ['box_2d'], point: [] },
+  'json-gemini': { box: ['box_2d'], point: ['point'], yxyx: true },
   'json-qwen': { box: ['bbox_2d'], point: ['point_2d'] },
   'json-custom': { box: ['bbox_2d', 'box_2d', 'bbox', 'box'], point: ['point_2d', 'point'] },
 };
