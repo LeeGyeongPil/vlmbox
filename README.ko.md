@@ -32,7 +32,7 @@
 
 | `model` | 출력 모양 | 축 순서 | 단위 | 기준 프레임 | 출처 |
 |---|---|---|---|---|---|
-| `gemini` | JSON `box_2d` (`{"boxes": [...]}` 래핑도 처리) | y 먼저 | 0-1000 | 이미지 전체 | [Vertex AI bounding box detection](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/bounding-box-detection), [Gemini image understanding](https://aistudio.google.com/docs/image-understanding) |
+| `gemini` | JSON `box_2d`, `{"label", "y", "x", "y2", "x2"}`, `{"point": [y, x]}` (`{"boxes": [...]}` 래핑도 처리) | y 먼저 | 0-1000 | 이미지 전체 | [Vertex AI bounding box detection](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/bounding-box-detection), [Gemini image understanding](https://aistudio.google.com/docs/image-understanding) |
 | `qwen2-vl` | `<\|box_start\|>(x1,y1),(x2,y2)<\|box_end\|>` | x 먼저 | 0-1000 | 이미지 전체 | Qwen2-VL 박스 토큰 |
 | `qwen2.5-vl` | JSON `bbox_2d`, `point_2d` | x 먼저 | 절대 픽셀 | 리사이즈된 입력(`smart_resize`, factor 28) | [Qwen3-VL 쿡북 2d_grounding](https://github.com/QwenLM/Qwen3-VL/blob/main/cookbooks/2d_grounding.ipynb), [qwen-vl-utils](https://github.com/QwenLM/Qwen3-VL/blob/main/qwen-vl-utils/src/qwen_vl_utils/vision_process.py) |
 | `qwen3-vl` | JSON `bbox_2d`, `point_2d` | x 먼저 | 0-1000 | 이미지 전체 | [Qwen3-VL 쿡북 2d_grounding](https://github.com/QwenLM/Qwen3-VL/blob/main/cookbooks/2d_grounding.ipynb) |

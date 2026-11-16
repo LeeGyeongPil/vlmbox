@@ -32,7 +32,7 @@ Checked on 2026-11-13. Every convention is turned into original-image pixels wit
 
 | `model` | Output shape | Axis order | Unit | Reference frame | Source |
 |---|---|---|---|---|---|
-| `gemini` | JSON `box_2d` (also `{"boxes": [...]}`) | y first | 0-1000 | whole image | [Vertex AI bounding box detection](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/bounding-box-detection), [Gemini image understanding](https://aistudio.google.com/docs/image-understanding) |
+| `gemini` | JSON `box_2d`, `{"label", "y", "x", "y2", "x2"}` or `{"point": [y, x]}` (also `{"boxes": [...]}`) | y first | 0-1000 | whole image | [Vertex AI bounding box detection](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/bounding-box-detection), [Gemini image understanding](https://aistudio.google.com/docs/image-understanding) |
 | `qwen2-vl` | `<\|box_start\|>(x1,y1),(x2,y2)<\|box_end\|>` | x first | 0-1000 | whole image | Qwen2-VL box tokens |
 | `qwen2.5-vl` | JSON `bbox_2d`, `point_2d` | x first | absolute pixels | the resized input (`smart_resize`, factor 28) | [Qwen3-VL cookbook, 2d_grounding](https://github.com/QwenLM/Qwen3-VL/blob/main/cookbooks/2d_grounding.ipynb), [qwen-vl-utils](https://github.com/QwenLM/Qwen3-VL/blob/main/qwen-vl-utils/src/qwen_vl_utils/vision_process.py) |
 | `qwen3-vl` | JSON `bbox_2d`, `point_2d` | x first | 0-1000 | whole image | [Qwen3-VL cookbook, 2d_grounding](https://github.com/QwenLM/Qwen3-VL/blob/main/cookbooks/2d_grounding.ipynb) |
